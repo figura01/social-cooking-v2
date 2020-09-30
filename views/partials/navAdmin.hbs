@@ -1,0 +1,45 @@
+<nav id="nav">
+    <div class="container">
+        <div class="nav-spacer">
+            <div class="nav-brand">
+                <a href="/" class="nav-brand">
+                    <img id="logo" class="brand-logo" src="/images/logo-min.png">
+                    <h1 class="brand-text">
+                        Social Cooking
+                    </h1>
+                </a>
+            </div>
+
+            <ul class="nav-links">
+                <li class="nav-item">
+                    <a class="nav-link" href="/tags/all">Tags</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/categories/all">Categories</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/recipes/all">Recipes</a>
+                </li>
+                
+                {{#if isLoggedIn}}
+                <li class="nav-item">
+                    <a class="nav-link" href="/profile/{{userId}}">
+                        <img src="{{avatar}}" />{{userbame}}
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/auth/logout">Logout</a>
+                </li>
+
+                {{else}}
+                    <li class="nav-item">
+                        <a class="nav-link" href="/auth/signin">Sign In</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/auth/signup">Sign Un</a>
+                    </li>
+                {{/if}}
+            </ul>
+        </div>
+    </div>
+</nav>

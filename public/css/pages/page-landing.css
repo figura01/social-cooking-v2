@@ -1,0 +1,26 @@
+.page-landing .header {
+    background-color: var(--color-ocre);
+    background-image: url('../../images/bg-body-2.png');
+    background-position: center center;
+    background-size: 40%;
+
+    min-height: 20em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+}
+
+.page-landing .visu-header {
+    width: 18em;
+    height: auto;
+}
+
+.page-landing .title {
+    margin: 1em 0;
+    font-weight: 900;
+    font-size: 4em;
+    line-height: 1em;
+
+}

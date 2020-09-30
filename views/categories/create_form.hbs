@@ -1,0 +1,10 @@
+<div class="container">
+    <h1>Create categories</h1>
+
+    <form class="form" method="POST" action="/categories/create">
+        <label for="input-label">Label</label>
+        <input class="input" type="text" id="input-label" name="label">
+        <button>Create</button>
+        <p>{{error_message}}</p>
+    </form>
+</div>

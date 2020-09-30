@@ -1,0 +1,124 @@
+<div class="container">
+    <h1>Recipe Edit</h1>
+    <form action="/recipes/{{recipe._id}}/edit" method="POST" enctype="multipart/form-data">
+        <div class="form-group">
+            <label for="recipe-title">Title</label>
+            <input type="text" name="title" id="recipe-title" value="{{recipe.title}}" required>
+        </div>
+
+        <div class="form-group">
+            <label for="recipe-description">Description</label>
+            <textarea name="description" id="recipe-description" rows="5" required>{{recipe.description}}</textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="recipe-ingredients">Ingredients</label>
+
+            {{#each recipe.ingredients}}
+            <input type="text" name="ingredients" id="recipe-ingredient" value="{{this}}" />
+            {{/each}}
+
+        </div>
+
+        <div class="form-group">
+            {{#each recipe.steps}}
+            <div class="step">
+                <label for="recipe-step-1">Step {{index}}
+                    <input type="text" name="steps" id="recipe-step-1" value="{{this}}">
+                </label>
+            </div>
+            {{/each}}
+
+        </div>
+
+        <div class="form-group">
+            <label for="recipe-category">Category</label>
+            <select name="category" id="recipe-categoty" required>
+
+
+                {{#each categories}}
+                {{#includesIdInAOO this._id ../recipe.category}}
+                <option selected value="{{this._id}}">{{this.label}}</option>
+                {{else}}
+                <option value="{{this._id}}">{{this.label}}</option>
+
+                {{/includesIdInAOO}}
+                {{/each}}
+            </select>
+        </div>
+
+        <div class="form-group">
+            <strong for="recipe-category">Tags</strong>
+            {{#each tags}}
+            <div class="tag">
+                <label for="tag-{{this.label}}">
+                    {{#includesId ../recipe.tags this._id}}
+                    <input checked type="checkbox" id="tag-{{this.label}}" name="tags" value="{{this._id}}" />
+                    {{this.label}}
+                    {{else}}
+                    <input type="checkbox" id="tag-{{this.label}}" name="tags" value="{{this._id}}"> {{this.label}}
+                    {{/includesId}}
+                </label>
+            </div>
+            {{/each}}
+        </div>
+
+        <div class="form-group">
+            <strong>Type of Plat</strong>
+            {{#isEqualString "Entrie" recipe.typePlate}}
+            <lable for="recipe-entrie">Entrie
+                <input type="radio" id="recipe-entrie" name="typePlate" value="Entrie" checked />
+            </lable>
+            {{else}}
+            <label for="recipe-entrie">Entrie
+                <input type="radio" id="recipe-entrie" name="typePlate" value="Entrie" />
+            </label>
+            {{/isEqualString}}
+
+            {{#isEqualString "Plat" recipe.typePlate}}
+            <label for="recipe-plat">Plat
+                <input type="radio" id="recipe-plat" name="typePlate" value="Plat" checked />
+            </label>
+            {{else}}
+            <label for="recipe-plat">Plat
+                <input type="radio" id="recipe-plat" name="typePlate" value="Plat" />
+            </label>
+            {{/isEqualString}}
+
+            {{#isEqualString "Dessert" recipe.typePlate}}
+            <label for="recipe-dessert">Dessert
+                <input type="radio" id="recipe-dessert" name="typePlate" value="Dessert" checked />
+            </label>
+            {{else}}
+            <label for="recipe-dessert">Dessert
+                <input type="radio" id="recipe-dessert" name="typePlate" value="Dessert" />
+            </label>
+            {{/isEqualString}}
+        </div>
+
+        <div class="form-group">
+            <label for="recipe-image">Image</label>
+            <input type="file" name="image" id="recipe-image" required>
+        </div>
+
+        <div class="form-group">
+            <label for="recipe-category">Owner</label>
+            <select name="owner" id="recipe-categoty" required>
+                <option value="">--Choose a owner--</option>
+                {{#each users}}
+                {{#isEqualString this._id ../recipe.owner}}
+                <option value="{{this._id}}" selected>{{this.username}}</option>
+                {{else}}
+                <option value="{{this._id}}">{{this.username}}</option>
+                {{/isEqualString}}
+                {{/each}}
+            </select>
+        </div>
+
+        <div class="from-footer">
+            <button>Edit</button>
+        </div>
+
+    </form>
+
+</div>

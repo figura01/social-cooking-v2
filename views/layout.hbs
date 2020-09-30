@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{title}}</title>
+  <link rel='stylesheet' href='/css/index.css' />
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script src="/js/index.js" type="module"></script>
+  {{#each js}}
+  <script type="module" src="/js/{{this}}.js"></script>
+  {{/each}}
+</head>
+
+<body>
+
+  {{#if isAdmin}}
+  {{> navAdmin}}
+  {{else}}
+  {{> navbar }}
+  {{/if}}
+  <main id="main">
+    {{{body}}}
+  </main>
+</body>
+
+</html>

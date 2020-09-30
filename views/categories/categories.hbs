@@ -1,0 +1,27 @@
+<div class="container">
+
+    <h1>Categoriess</h1>
+    <a href="/categories/create">+ New</a>
+    <table>
+        <thead>
+            <tr>
+                <th>#id</th>
+                <th>label</th>
+                <th> edite</th>
+                <th>delete</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {{#each categories}}
+            <tr>
+                <td>{{this._id}}</td>
+                <td>{{this.label}}</td>
+                <td><a href="/categories/{{this._id}}/edit">Edit</a></td>
+                <td><a href="/categories/{{this._id}}/delete">Delte</a></td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+
+</div>

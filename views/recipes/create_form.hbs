@@ -1,0 +1,112 @@
+<div class="container">
+    <h1>Recipes Create</h1>
+    <form action="/recipes/create" method="POST" enctype="multipart/form-data">
+        <div class="form-group">
+            <label for="recipe-title">Title</label>
+            <input type="text" name="title" id="recipe-title" required>
+        </div>
+
+        <div class="form-group">
+            <label for="recipe-description">Description</label>
+            <textarea name="description" id="recipe-description" rows="5" required></textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="recipe-ingredients">Ingredients</label>
+            <input type="text" name="ingredients" id="recipe-ingredient" required><button>add</button>
+        </div>
+
+        <div class="form-group">
+
+            <div class="step">
+                <label for="recipe-step-1">Step 1
+                    <input type="text" name="steps" id="recipe-step-1">
+                </label>
+            </div>
+
+            <div class="step">
+                <label for="recipe-step-2">Step 2
+                    <input type="text" name="steps" id="recipe-step-2">
+                </label>
+            </div>
+            <div class="step">
+                <label for="recipe-step-3">Step 3
+                    <input type="text" name="steps" id="recipe-step-3">
+                </label>
+            </div>
+            <div class="step">
+                <label for="recipe-step-2">Step 4
+                    <input type="text" name="steps" id="recipe-step-4">
+                </label>
+            </div>
+            <div class="step">
+                <label for="recipe-step-2">Step 5
+                    <input type="text" name="steps" id="recipe-step-5">
+                </label>
+            </div>
+            <div class="step">
+                <label for="recipe-step-2">Step 6
+                    <input type="text" name="steps" id="recipe-step-6">
+                </label>
+            </div>
+
+        </div>
+
+        <div class="form-group">
+            <label for="recipe-category">Category</label>
+            <select name="category" id="recipe-categoty" required>
+                <option value="">--Please choose a category--</option>
+                {{#each categories}}
+                <option value="{{this._id}}">{{this.label}}</option>
+                {{/each}}
+            </select>
+        </div>
+
+        <div class="form-group">
+            <strong for="recipe-category">Tags</strong>
+            {{#each tags}}
+            <div class="tag">
+                <label for="tag-{{this.label}}">
+                    <input type="checkbox" id="tag-{{this.label}}" name="tags" value={{this._id}}> {{this.label}}
+                </label>
+            </div>
+
+            {{/each}}
+            </select>
+        </div>
+
+        <div class="form-group">
+            <strong>Type of Plat</strong>
+            <lable for="recipe-entrie">Entrie
+                <input type="radio" id="recipe-entrie" name="typePlate" value="Entrie" checked />
+            </lable>
+            <lable for="recipe-plat">Plat
+                <input type="radio" id="recipe-plat" name="typePlate" value="Plat" />
+            </lable>
+            <lable for="recipe-dessert">Dessert
+                <input type="radio" id="recipe-dessert" name="typePlate" value="Dessert" />
+            </lable>
+        </div>
+
+        <div class="form-group">
+            <label for="recipe-image">Image</label>
+            <input type="file" name="image" id="recipe-image" required>
+        </div>
+
+        <div class="form-group">
+            <label for="recipe-category">Owner</label>
+            <select name="owner" id="recipe-categoty" required>
+                <option value="">--Choose a owner--</option>
+                {{#each users}}
+                <option value="{{this._id}}">{{this.username}}</option>
+                {{/each}}
+            </select>
+        </div>
+
+        <div class="from-footer">
+            <button>Create</button>
+        </div>
+
+    </form>
+
+</div>

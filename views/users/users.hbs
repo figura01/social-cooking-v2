@@ -1,0 +1,54 @@
+<div class="container">
+    <h1>Users</h1>
+    <a href="/users/create">+ New</a>
+    <div class="table-overflow">
+        <table class="table table-users">
+            <thead>
+                <tr>
+                    <th>#id</th>
+                    <th>Avatar</th>
+
+                    <th>FirstName</th>
+                    <th>LastName</th>
+                    <th>Username</th>
+                    <th>Genre</th>
+                    <th>Role</th>
+                    <th>Email</th>
+                    <th>Password</th>
+
+                    <th>FavRecipes</th>
+                    <th>FavUsers</th>
+                    <th>Followers</th>
+
+                    <th>edite</th>
+                    <th>delete</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {{#each users}}
+                <tr>
+                    <td>{{this._id}}</td>
+                    <td class="cell-avatar"><img src={{this.avatar}} />{{this.avatar}}</td>
+
+                    <td>{{this.firstname}}</td>
+                    <td>{{this.lastname}}</td>
+                    <td>{{this.username}}</td>
+                    <td>{{this.genre}}</td>
+                    <td>{{this.role}}</td>
+                    <td>{{this.email}}</td>
+                    <td>{{this.password}}</td>
+
+                    <td>{{this.favRecipes}}</td>
+                    <td>{{this.favUsers}}</td>
+                    <td>{{this.followers}}</td>
+
+                    <td><a href="/users/{{this._id}}/edit">Edite</a></td>
+                    <td><a href="/users/{{this._id}}/delete">Delte</a></td>
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+    </div>
+
+</div>

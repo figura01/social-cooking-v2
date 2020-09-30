@@ -1,0 +1,26 @@
+<div class="container">
+    <h1>tags</h1>
+    <a href="/tags/create">+ New</a>
+    <table>
+        <thead>
+            <tr>
+                <th>#id</th>
+                <th>label</th>
+                <th> edite</th>
+                <th>delete</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {{#each tags}}
+            <tr>
+                <td>{{this._id}}</td>
+                <td>{{this.label}}</td>
+                <td><a href="/tags/{{this._id}}/edit">Edite</a></td>
+                <td><a href="/tags/{{this._id}}/delete">Delte</a></td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+
+</div>

@@ -1,0 +1,90 @@
+@import url('https://fonts.googleapis.com/css2?family=Rokkitt:wght@100;300;700;900&display=swap');
+
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    font: 10px 'Rokkitt', serif;
+}
+
+a {
+    color: #00B7FF;
+}
+
+a:visited,
+a:link,
+a {
+    text-decoration: none;
+    color: rgba(0, 0, 0, 0.4);
+}
+
+a:hover {
+    color: rgba(0, 0, 0, 8);
+}
+
+button:hover,
+a:hover {
+    outline: none;
+    cursor: pointer;
+}
+
+
+ul,
+ol,
+li {
+    list-style: none;
+}
+
+h1 {
+    font-size: 3em;
+}
+
+h2 {
+    font-size: 2em;
+}
+
+h3 {
+    font-size: 1.5em;
+    color: var(--color-main-red);
+}
+
+p {
+    font-size: 1.1em;
+}
+
+.container {
+    width: 100%;
+    margin: 0 auto;
+}
+
+.table td {
+    padding: 5px;
+}
+
+.table-users img,
+.table-recipes img {
+    width: 30px;
+    height: auto;
+}
+
+.cell-avatar {
+    display: flex;
+    flex-direction: column;
+}
+
+
+.table-overflow {
+    overflow-x: scroll;
+}
+
+/******** Error message *******/
+.error-message {
+    color: orangered;
+}
+
+.success-message {
+    color: green;
+}
