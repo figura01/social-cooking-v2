@@ -1,0 +1,37 @@
+[{
+  "_id": {
+    "$oid": "5f73efd2f67dbad5b901c130"
+  },
+  "label": "Asie",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f73efd2f67dbad5b901c131"
+  },
+  "label": "North America",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f73efd2f67dbad5b901c132"
+  },
+  "label": "South America",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f73efd2f67dbad5b901c133"
+  },
+  "label": "Europe",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f73efd2f67dbad5b901c134"
+  },
+  "label": "Africa",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f73efd2f67dbad5b901c135"
+  },
+  "label": "Oceania",
+  "__v": 0
+}]

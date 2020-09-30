@@ -1,0 +1,67 @@
+[{
+  "_id": {
+    "$oid": "5f73e402a17e6fd28284bd72"
+  },
+  "label": "Hot",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f73e402a17e6fd28284bd73"
+  },
+  "label": "Meal",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f73e402a17e6fd28284bd74"
+  },
+  "label": "Chicken",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f73e402a17e6fd28284bd75"
+  },
+  "label": "Olive oil",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f73e402a17e6fd28284bd76"
+  },
+  "label": "Traditional",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f73e402a17e6fd28284bd77"
+  },
+  "label": "Cheap",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f73e402a17e6fd28284bd78"
+  },
+  "label": "Fish",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f73e402a17e6fd28284bd79"
+  },
+  "label": "Black pepper",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f73e402a17e6fd28284bd7a"
+  },
+  "label": "green pepper",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f73e402a17e6fd28284bd7b"
+  },
+  "label": "Spicy",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f73e402a17e6fd28284bd7c"
+  },
+  "label": "Vegan",
+  "__v": 0
+}]
