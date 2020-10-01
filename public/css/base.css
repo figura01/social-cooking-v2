@@ -60,6 +60,24 @@ p {
     margin: 0 auto;
 }
 
+.table thead th {
+    background-color: #222;
+    color: white;
+}
+
+.table td {
+    vertical-align: top;
+    ;
+}
+
+.table tr {
+    border-bottom: 1px solid #666;
+}
+
+.table tr:nth-child(odd) {
+    background-color: #eee;
+}
+
 .table td {
     padding: 5px;
 }
@@ -73,6 +91,11 @@ p {
 .cell-avatar {
     display: flex;
     flex-direction: column;
+}
+
+.cell-steps {
+    width: 200px;
+    margin: 10px;
 }
 
 

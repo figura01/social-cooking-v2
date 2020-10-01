@@ -79,16 +79,73 @@ router.get('/:id/edit', upoloader.single("image"), async (req, res, next) => {
 });
 
 router.post('/:id/edit', upoloader.single("image"), async (req, res, next) => {
-    console.log('POST Edit Form');
-    const recipeId = req.params.id;
-    const updatedRecipe = req.body;
 
     try {
+        console.log('POST Edit Form');
+        const recipeId = req.params.id;
+        console.log(recipeId);
+        const updatedRecipe = req.body;
+        if (req.file) {
+            updatedRecipe.image = req.file.path;
+        }
 
-    } catch(errDb) {
+        updatedRecipe.steps.forEach((e, index) => {
+            if (e === '') {
+                updatedRecipe.steps.splice(index);
+            }
+        });
+        console.log(updatedRecipe.steps.length);
+
+        const update = await Recipe.findByIdAndUpdate(recipeId, updatedRecipe, {
+            new: true
+        });
+        res.redirect('/recipes/');
+
+    } catch (errDb) {
         console.log(errDb);
     }
 
 });
+
+router.get("/:id/delete", async (req, res, next) => {
+    try {
+        const recipeId = req.params.id;
+        await Recipe.findByIdAndDelete(recipeId);
+        res.redirect("/recipes");
+    } catch (error) {
+        next(error);
+    }
+});
+
+router.get("/all", async (req, res, newt) => {
+    try {
+        const allRecipes = await Recipe.find({});
+        console.log(allRecipes);
+
+        res.render("recipes/show_all", {
+            recipes: allRecipes,
+            css: ["respies-gris.css"]
+        });
+
+    } catch (errDb) {
+        console.log(errDb);
+    }
+});
+
+router.get("/:id/showone", async (req, res, newt) => {
+    console.log('GET ONE recipe');
+    try {
+        const recipeId = req.params.id;
+        console.log(recipeId);
+        const cRp = await Recipe.findById(recipeId);
+        console.log(cRp);
+        res.render("recipes/show_one", {
+            recipe: cRp
+        });
+    } catch (errDb) {
+        console.log(errDb);
+    }
+});
+
 
 module.exports = router;
