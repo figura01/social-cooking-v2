@@ -3,6 +3,7 @@ var router = express.Router();
 const User = require("../models/Users");
 const uploader = require("../config/cloudinary");
 const bcrypt = require("bcrypt");
+const Recipe = require('../models/Recipes');
 const salt = 10;
 
 /* GET users listing. */
@@ -119,6 +120,18 @@ router.get('/:id/delete', async (req, res, next) => {
   const userId = req.params.id;
   await User.findByIdAndRemove(userId);
   res.redirect('/users');
+});
+
+router.get("/all", async (req, res, next) => {
+  try {
+    const recipes = await User.find({role: "user"});
+    res.render("users/all", {
+      users
+    });
+  } catch(errDb){
+    console.log(errDb);
+  }
+   
 });
 
 module.exports = router;

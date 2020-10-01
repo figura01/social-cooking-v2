@@ -1,8 +1,4 @@
 .page-landing .header {
-    background-color: var(--color-ocre);
-    background-image: url('../../images/bg-body-2.png');
-    background-position: center center;
-    background-size: 40%;
 
     min-height: 20em;
     display: flex;

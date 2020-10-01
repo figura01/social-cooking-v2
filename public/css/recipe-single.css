@@ -1,0 +1,9 @@
+.page-single-card .card.recipe {
+    background-color: #ccc;
+    width: 80%;
+    margin: 0 auto;
+}
+
+.page-single-card .card.recipe img {
+    width: 100%;
+}

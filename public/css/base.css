@@ -8,6 +8,10 @@
 
 body {
     font: 10px 'Rokkitt', serif;
+    background-color: var(--color-ocre);
+    background-image: url('../../images/bg-body-2.png');
+    background-position: center center;
+    background-size: 40%;
 }
 
 a {
@@ -110,4 +114,17 @@ p {
 
 .success-message {
     color: green;
+}
+
+/********* BTNS ***********/
+.btn.btn-more {
+    padding: 4px 10px;
+    background-color: rgb(186 33 38);
+    color: white;
+    border-radius: 4px;
+    transition: all .3s ease-out;
+}
+
+.btn.btn-more:hover {
+    background-color: rgb(206 47 52);
 }

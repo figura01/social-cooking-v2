@@ -124,7 +124,7 @@ router.get("/all", async (req, res, newt) => {
 
         res.render("recipes/show_all", {
             recipes: allRecipes,
-            css: ["respies-gris.css"]
+            css: ["recipes-grid.css"]
         });
 
     } catch (errDb) {

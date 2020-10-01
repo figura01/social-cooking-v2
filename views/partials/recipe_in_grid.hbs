@@ -1,12 +1,14 @@
 <li class="grid list item">
     <div class="card">
         <img src="{{this.image}}" />
-        <h3>{{this.title}}</h3>
+        <div class="card-content">
+            <h3>{{this.title}}</h3>
 
-        <div class="actions">
-            <a href="{{this._id}}/showone">
-                See this recipe
-            </a>
+            <div class="actions">
+                <a href="{{this._id}}/showone" class="btn btn-more">
+                    See this recipe
+                </a>
+            </div>
         </div>
     </div>
 </li>
