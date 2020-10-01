@@ -124,14 +124,44 @@ router.get('/:id/delete', async (req, res, next) => {
 
 router.get("/all", async (req, res, next) => {
   try {
-    const recipes = await User.find({role: "user"});
-    res.render("users/all", {
-      users
+    const users = await User.find({
+      role: "user"
     });
-  } catch(errDb){
+
+
+
+
+    const mapUsers = users.map((user) => user.toObject());
+
+
+    const promises = mapUsers.map(u => Recipe.find({
+      owner: `${u._id}`
+    }))
+
+    Promise.all(promises).then(recipes => {
+   
+      mapUsers.forEach(user => {
+        const foundRecipe = recipes.find(recipe => recipe[0] && recipe[0].owner.toString() === user._id.toString())
+        user.nbRecipes = foundRecipe ?  foundRecipe.length : 0
+      })
+      console.log(mapUsers);
+    })
+    
+    // for (let user of mapUsers) {
+    //   const recipes = await Recipe.find({
+    //     owner: `${user._id}`
+    //   })
+    //   user.nbRecipes = recipes.length;
+    // }
+    // console.log(mapUsers)
+
+    res.render("users/show_all", {
+      users: mapUsers
+    });
+  } catch (errDb) {
     console.log(errDb);
   }
-   
+
 });
 
 module.exports = router;

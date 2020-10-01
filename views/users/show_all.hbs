@@ -1,25 +1,33 @@
-<div class="container">
-    <h2 class="title-page">
-        All users
-    </h2>
+<div class="page-all-users">
+    <div class="container">
 
-    <ul class="grid list users">
-        {{#each users}}
-        <li class="grid list item-user">
-            <div class="card-user">
-                <div class="card-content-user">
-                    <div class="visu-avatar">
-                        {{this.avatar}}
-                    </div>
-                    <div class="content-user-info">
-                        {{this.username}}
-                        <a href="/recipes/{{this._id}}/user" class="btn-btn-more">
-                            See recipes
-                        </a>
+
+        <h2 class="title-page">
+            All users
+        </h2>
+
+        <ul class="grid list users">
+            {{#each users}}
+            <li class="grid list item item-user">
+                <div class="card-user">
+                    <div class="card-content-user">
+                        <div class="visu-avatar">
+                            <img class="avrtar-user" src="{{this.avatar}}" alt="{{this.username}}" />
+                        </div>
+                        <div class="content-user-info">
+                            <h4 class="username">{{this.username}}</h4>
+
+                            <div class="actions-btn">
+                                
+                                <a href="/recipes/{{this._id}}/user" class="btn btn-more">
+                                   ({{nbRecipes}}) See recipes
+                                </a>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </li>
-        {{/each}}
-    </ul>
+            </li>
+            {{/each}}
+        </ul>
+    </div>
 </div>

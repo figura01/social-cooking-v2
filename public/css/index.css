@@ -8,5 +8,6 @@
 
 /******PAGE******/
 @import url('./pages/page-landing.css');
+@import url('./pages/page-all-users.css');
 @import url('./recipe-single.css');
 @import url('./recipes-grid.css');

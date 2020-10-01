@@ -120,7 +120,7 @@ router.get("/:id/delete", async (req, res, next) => {
 router.get("/all", async (req, res, newt) => {
     try {
         const allRecipes = await Recipe.find({});
-        console.log(allRecipes);
+        console.log('all users recipes', allRecipes);
 
         res.render("recipes/show_all", {
             recipes: allRecipes,
@@ -145,6 +145,37 @@ router.get("/:id/showone", async (req, res, newt) => {
     } catch (errDb) {
         console.log(errDb);
     }
+});
+
+router.get("/:id/user", async (req, res, next) => {
+    console.log('GET All recipes from this user ');
+    try {
+        const userId = req.params.id;
+        const recipes = await Recipe.find({
+            owner: userId
+        });
+        console.log(recipes.length);
+
+        const haveRecipe = recipes.length > 0 ? true : false;
+        console.log(haveRecipe);
+
+        if (haveRecipe ) {
+            res.render("recipes/show_all_by_user", {
+                recipes,
+                haveRecipe,
+            });
+        } else {
+            res.render("recipes/show_all_by_user", {
+                message: "Sorry this user don't have shared any recipes"
+            });
+        }
+
+    } catch (errDb) {
+        console.log(errDb);
+    }
+
+
+
 });
 
 
