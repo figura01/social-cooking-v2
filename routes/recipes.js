@@ -13,7 +13,7 @@ router.get('/', async (req, res, next) => {
             recipes
         });
     } catch (errDb) {
-        console.log(errDb)
+        console.log(errDb);
     }
 
 });
