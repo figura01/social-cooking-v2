@@ -1,0 +1,8 @@
+.grid.list {
+    grid-template-columns: repeat(3fr, 1);
+    grid-gap: 20px;
+}
+
+.grid.list .item {
+    background-color: #eee;
+}
