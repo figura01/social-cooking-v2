@@ -5,8 +5,9 @@ const Category = require("../models/Categories");
 const Tag = require("../models/Tags");
 const User = require("../models/Users");
 const upoloader = require("../config/cloudinary");
-
-router.get('/', async (req, res, next) => {
+const protectedAdminRoute = require("../middlewares/protectedAdminRoute");
+const protectedUserRoute = require("../middlewares/protectedUserRoute");
+router.get('/', protectedAdminRoute,  async (req, res, next) => {
     try {
         const recipes = await Recipe.find({});
         res.render("recipes/recipes", {
@@ -18,7 +19,7 @@ router.get('/', async (req, res, next) => {
 
 });
 
-router.get('/create', async (req, res, next) => {
+router.get('/create', protectedAdminRoute,  async (req, res, next) => {
     try {
         const tags = await Tag.find({});
         const categories = await Category.find({});
@@ -36,7 +37,7 @@ router.get('/create', async (req, res, next) => {
 
 });
 
-router.post('/create', upoloader.single("image"), async (req, res, next) => {
+router.post('/create', protectedAdminRoute,  upoloader.single("image"), async (req, res, next) => {
     try {
         console.log('POST create Recipe');
         console.log(req.body);
@@ -53,7 +54,7 @@ router.post('/create', upoloader.single("image"), async (req, res, next) => {
 
 });
 
-router.get('/:id/edit', upoloader.single("image"), async (req, res, next) => {
+router.get('/:id/edit', protectedAdminRoute, upoloader.single("image"), async (req, res, next) => {
     console.log("GET recipe to Edit");
     try {
         const recipeId = req.params.id;
@@ -78,7 +79,7 @@ router.get('/:id/edit', upoloader.single("image"), async (req, res, next) => {
     }
 });
 
-router.post('/:id/edit', upoloader.single("image"), async (req, res, next) => {
+router.post('/:id/edit', protectedAdminRoute, upoloader.single("image"), async (req, res, next) => {
 
     try {
         console.log('POST Edit Form');
@@ -107,7 +108,7 @@ router.post('/:id/edit', upoloader.single("image"), async (req, res, next) => {
 
 });
 
-router.get("/:id/delete", async (req, res, next) => {
+router.get("/:id/delete", protectedAdminRoute, async (req, res, next) => {
     try {
         const recipeId = req.params.id;
         await Recipe.findByIdAndDelete(recipeId);
@@ -154,12 +155,12 @@ router.get("/:id/user", async (req, res, next) => {
         const recipes = await Recipe.find({
             owner: userId
         });
-        console.log(recipes.length);
 
         const haveRecipe = recipes.length > 0 ? true : false;
-        console.log(haveRecipe);
 
-        if (haveRecipe ) {
+        console.log(typeof res.locals.isLoggedIn);
+
+        if (haveRecipe) {
             res.render("recipes/show_all_by_user", {
                 recipes,
                 haveRecipe,
@@ -173,9 +174,30 @@ router.get("/:id/user", async (req, res, next) => {
     } catch (errDb) {
         console.log(errDb);
     }
+});
 
+router.get('/:id/my', protectedUserRoute, (req, res, next) => {
+    console.log('GET my recipes from this user');
+});
 
+router.get('/:id/my/create', protectedUserRoute, (req, res, next) => {
+    console.log('GET Create personnal recipe');
+});
 
+router.post('/:id/my/create', protectedUserRoute, (req, res, next) => {
+    console.log('POST Create personnal recipe');
+});
+
+router.get('/:id/my/:recipeId/edit', protectedUserRoute, (req, res, next) => {
+    console.log('GET EDIT personnal recipe');
+});
+
+router.post('/:id/my/:recipeId/edit', protectedUserRoute, (req, res, next) => {
+    console.log('POST EDIT personnal recipe');
+});
+
+router.get('/:id/my/:recipeId/delete', protectedUserRoute, (req, res, next) => {
+    console.log('GET DELETE personnal recipe');
 });
 
 

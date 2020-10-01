@@ -6,8 +6,10 @@ const bcrypt = require("bcrypt");
 const Recipe = require('../models/Recipes');
 const salt = 10;
 
+const protectedAdminRoute = require("../middlewares/protectedAdminRoute");
+
 /* GET users listing. */
-router.get('/', async (req, res, next) => {
+router.get('/', protectedAdminRoute, async (req, res, next) => {
   const users = await User.find({});
 
   res.render('users/users', {
@@ -15,12 +17,12 @@ router.get('/', async (req, res, next) => {
   });
 });
 
-router.get('/create', function (req, res, next) {
+router.get('/create', protectedAdminRoute, function (req, res, next) {
   console.log('GET Create user');
   res.render('users/create_form');
 });
 
-router.post('/create', uploader.single("avatar"), async (req, res, next) => {
+router.post('/create', protectedAdminRoute,  uploader.single("avatar"), async (req, res, next) => {
   console.log('POST Create user');
   console.log('req.body: ', req.body);
   console.log('req.file: ', req.file);
@@ -56,7 +58,7 @@ router.post('/create', uploader.single("avatar"), async (req, res, next) => {
   }
 });
 
-router.get('/:id/edit', async (req, res, next) => {
+router.get('/:id/edit', protectedAdminRoute,  async (req, res, next) => {
   try {
     const userId = req.params.id;
 
@@ -80,7 +82,7 @@ router.get('/:id/edit', async (req, res, next) => {
 
 });
 
-router.post('/:id/edit', uploader.single("newAvatar"), async (req, res, next) => {
+router.post('/:id/edit', protectedAdminRoute, uploader.single("newAvatar"), async (req, res, next) => {
   try {
     console.log('POST Edit User');
     console.group('-------req-body: ', req.body);
@@ -116,7 +118,7 @@ router.post('/:id/edit', uploader.single("newAvatar"), async (req, res, next) =>
 
 });
 
-router.get('/:id/delete', async (req, res, next) => {
+router.get('/:id/delete', protectedAdminRoute,  async (req, res, next) => {
   const userId = req.params.id;
   await User.findByIdAndRemove(userId);
   res.redirect('/users');
@@ -124,29 +126,42 @@ router.get('/:id/delete', async (req, res, next) => {
 
 router.get("/all", async (req, res, next) => {
   try {
+     const userConnected = res.locals.userId;
     const users = await User.find({
-      role: "user"
+      role: "user",
+      _id: {$ne: userConnected}
     });
 
+   
 
 
-
-    const mapUsers = users.map((user) => user.toObject());
+    const mapUsers = users.map((user) => {
+      console.log(user);
+      return user.toObject();
+    });
 
 
     const promises = mapUsers.map(u => Recipe.find({
       owner: `${u._id}`
-    }))
+    }));
 
     Promise.all(promises).then(recipes => {
-   
+
       mapUsers.forEach(user => {
         const foundRecipe = recipes.find(recipe => recipe[0] && recipe[0].owner.toString() === user._id.toString())
-        user.nbRecipes = foundRecipe ?  foundRecipe.length : 0
+        user.nbRecipes = foundRecipe ? foundRecipe.length : 0
       })
       console.log(mapUsers);
-    })
-    
+
+      console.log('-------res.locals-------', res.locals);
+      const isLogged = res.locals.isLoggedIn;
+
+      res.render("users/show_all", {
+        users: mapUsers,
+        isLogged
+      });
+    });
+
     // for (let user of mapUsers) {
     //   const recipes = await Recipe.find({
     //     owner: `${user._id}`
@@ -155,13 +170,15 @@ router.get("/all", async (req, res, next) => {
     // }
     // console.log(mapUsers)
 
-    res.render("users/show_all", {
-      users: mapUsers
-    });
+
   } catch (errDb) {
     console.log(errDb);
   }
 
+});
+
+router.get('/:id/profile', async (req, res, next) => {
+  console.log('GET profile for user logged only')
 });
 
 module.exports = router;

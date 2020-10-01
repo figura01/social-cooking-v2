@@ -1,8 +1,9 @@
 const express = require("express");
 const router = express.Router();
 const Tag = require("../models/Tags.js");
+const protectedAdminRoute = require("../middlewares/protectedAdminRoute");
 
-router.get("/", async (req, res, next) => {
+router.get("/", protectedAdminRoute, async (req, res, next) => {
     try {
         const tags = await Tag.find({});
         res.render("tags/tags", {
@@ -14,11 +15,11 @@ router.get("/", async (req, res, next) => {
     }
 });
 
-router.get("/create", (req, res, next) => {
+router.get("/create", protectedAdminRoute, (req, res, next) => {
     res.render("tags/create_form");
 });
 
-router.post("/create", async (req, res, next) => {
+router.post("/create", protectedAdminRoute, async (req, res, next) => {
     try {
         const tag = req.body;
         const foundTag = await Tag.find({
@@ -43,7 +44,7 @@ router.post("/create", async (req, res, next) => {
 
 });
 
-router.get("/:id/delete", async (req, res, next) => {
+router.get("/:id/delete", protectedAdminRoute, async (req, res, next) => {
     try {
         const tagId = req.params.id;
         await Tag.findByIdAndDelete(tagId);
@@ -53,7 +54,7 @@ router.get("/:id/delete", async (req, res, next) => {
     }
 });
 
-router.get("/:id/edit", async (req, res, next) => {
+router.get("/:id/edit", protectedAdminRoute, async (req, res, next) => {
     try {
         const tagId = req.params.id;
         const tag = await Tag.findById(tagId);
@@ -66,7 +67,7 @@ router.get("/:id/edit", async (req, res, next) => {
     }
 });
 
-router.post("/:id/edit", async (req, res, next) => {
+router.post("/:id/edit", protectedAdminRoute, async (req, res, next) => {
     try {
         const tagId = req.params.id;
         const tag = req.body;

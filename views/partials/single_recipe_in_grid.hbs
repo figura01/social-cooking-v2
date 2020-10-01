@@ -5,9 +5,13 @@
             <h3>{{this.title}}</h3>
 
             <div class="actions">
-                <a href="{{this._id}}/showone" class="btn btn-more">
+                <a href="/recipes/{{this._id}}/showone" class="btn btn-more">
                     See this recipe
                 </a>
+
+                {{#if isLoggedIn}}
+                <button class="btn btn-add-favorite">Add to Favorite</button>
+                {{/if}}
             </div>
         </div>
     </div>

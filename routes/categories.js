@@ -1,8 +1,9 @@
 const express = require("express");
 const router = express.Router();
+const protectedAdminRoute = require("../middlewares/protectedAdminRoute");
 const Category = require("../models/Categories.js");
 
-router.get("/", async (req, res, next) => {
+router.get("/", protectedAdminRoute,  async (req, res, next) => {
     try {
         const categories = await Category.find({});
         res.render("categories/categories", {
@@ -14,11 +15,11 @@ router.get("/", async (req, res, next) => {
     }
 });
 
-router.get("/create", (req, res, next) => {
+router.get("/create", protectedAdminRoute, (req, res, next) => {
     res.render("categories/create_form");
 });
 
-router.post("/create", async (req, res, next) => {
+router.post("/create", protectedAdminRoute, async (req, res, next) => {
     try {
         const category = req.body;
         const foundCategory = await Category.find({
@@ -43,7 +44,7 @@ router.post("/create", async (req, res, next) => {
 
 });
 
-router.get("/:id/delete", async (req, res, next) => {
+router.get("/:id/delete", protectedAdminRoute, async (req, res, next) => {
     try {
         const categoryId = req.params.id;
         await Category.findByIdAndDelete(categoryId);
@@ -53,7 +54,7 @@ router.get("/:id/delete", async (req, res, next) => {
     }
 });
 
-router.get("/:id/edit", async (req, res, next) => {
+router.get("/:id/edit", protectedAdminRoute, async (req, res, next) => {
     try {
         const categoryId = req.params.id;
         const category = await Category.findById(categoryId);
@@ -66,7 +67,7 @@ router.get("/:id/edit", async (req, res, next) => {
     }
 });
 
-router.post("/:id/edit", async (req, res, next) => {
+router.post("/:id/edit", protectedAdminRoute, async (req, res, next) => {
     try {
         const categoryId = req.params.id;
         const category = req.body;
