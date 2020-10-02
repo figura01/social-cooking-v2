@@ -266,7 +266,7 @@ router.get('/:id/my/edit', protectedUserRoute, async (req, res, next) => {
 
 });
 
-router.post('/:id/my/edit', protectedUserRoute, upoloader.single("image"), async (req, res, next) => {
+router.post('/:id/my/edit', protectedUserRoute, upoloader.single("newImage"), async (req, res, next) => {
     try {
         console.log('POST EDIT personnal recipe');
         const recipeId = req.params.id;
