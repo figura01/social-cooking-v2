@@ -173,5 +173,6 @@ p {
 .btn-btn-signin:hover,
 .btn.btn-signup:hover {
     background-color: rgb(202, 55, 60);
+    background-color: rgb(202, 55, 60);
     color: white;
 }
