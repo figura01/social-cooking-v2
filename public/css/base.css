@@ -133,12 +133,12 @@ p {
     border-radius: 4px;
     color: whitesmoke;
     font-size: 1rem;
-    ;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
 }
 
 .btn.btn-more {
 
-    background-color: rgb(186 33 38);
+    background-color: rgb(186, 33, 38);
     color: white;
 
     transition: all .3s ease-out;
@@ -161,4 +161,17 @@ p {
 .btn.btn-edit,
 .btn.btn-update {
     background-color: orange;
+}
+
+.btn-btn-signin,
+.btn.btn-signup {
+    background-color: rgb(186, 33, 38);
+    color: white;
+    transition: all 0.2s ease-out;
+}
+
+.btn-btn-signin:hover,
+.btn.btn-signup:hover {
+    background-color: rgb(202, 55, 60);
+    color: white;
 }
