@@ -79,3 +79,9 @@
 .part.steps input {
     margin-left: .5rem;
 }
+
+.form.form-signin,
+.form.form-signup {
+    max-width: 300px;
+    margin: 0 auto;
+}
