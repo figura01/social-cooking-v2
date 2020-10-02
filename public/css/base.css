@@ -163,7 +163,7 @@ p {
     background-color: orange;
 }
 
-.btn-btn-signin,
+.btn.btn-signin,
 .btn.btn-signup {
     background-color: rgb(186, 33, 38);
     transition: all 0.2s ease-out;
