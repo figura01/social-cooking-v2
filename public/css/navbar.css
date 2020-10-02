@@ -57,6 +57,12 @@
     color: whitesmoke;
     font-size: 1.3em;
     font-weight: 700;
+    transition: all .2s ease-out;
+}
+
+#nav-admin .nav-link:hover,
+#nav .nav-link:hover {
+    color: rgb(228, 214, 181);
 }
 
 #nav-admin .nav-link img,

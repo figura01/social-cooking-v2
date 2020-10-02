@@ -1,0 +1,13 @@
+<div class="show-my-all">
+    <div class="container">
+        <h2 class="title-page">All my recipes</h2>
+
+
+        <ul class="grid list">
+            {{#each recipes}}
+            {{> single_recipe_logged this}}
+            {{/each}}
+        </ul>
+
+    </div>
+</div>

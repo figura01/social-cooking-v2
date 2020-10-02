@@ -1,19 +1,21 @@
 <div class="page recipes-by-ueser">
     <div class="container">
-        <h2 class="title-page">Recipes by user</h2>
-        
+        <h2 class="title-page">their Recipes</h2>
+
         {{#if message}}
-            <div>
-                <p>{{message}}</p>
-            </div>
+        <div>
+            <p>{{message}}</p>
+        </div>
         {{else}}
-            
-           <ul class="grid list">
-               {{#each recipes}}
-                    {{> single_recipe_in_grid this}}
-               {{/each}}
-           </ul>
-           
+
+        <ul class="grid list">
+            {{#if isLoggedIn}}
+            {{#each recipes}}
+            {{> single_recipe_in_grid this}}
+            {{/each}}
+            {{/if}}
+        </ul>
+
         {{/if}}
     </div>
 </div>

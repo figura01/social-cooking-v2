@@ -1,0 +1,24 @@
+<li class="grid list item">
+    <div class="card">
+        <img src="{{this.image}}" />
+        <div class="card-content">
+            <h3>{{this.title}}</h3>
+
+            <div class="actions-btn">
+
+                <a href="/recipes/{{this._id}}/my/show" class="btn btn-show">
+                    Show
+                </a>
+
+                <a href="/recipes/{{this._id}}/my/edit" class="btn btn-edit">
+                    Edit
+                </a>
+
+                <a href="/recipes/{{this._id}}/my/delete" class="btn btn-delete">
+                    Delete
+                </a>
+
+            </div>
+        </div>
+    </div>
+</li>

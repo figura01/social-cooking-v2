@@ -148,7 +148,7 @@ router.get("/:id/showone", async (req, res, newt) => {
     }
 });
 
-router.get("/:id/user", async (req, res, next) => {
+router.get("/:id/all", async (req, res, next) => {
     console.log('GET All recipes from this user ');
     try {
         const userId = req.params.id;
@@ -176,6 +176,25 @@ router.get("/:id/user", async (req, res, next) => {
     }
 });
 
+router.get('/my', protectedUserRoute, async (req, res, next) => {
+    console.log('GET All my recipes And show one');
+    try {
+        userId = res.locals.userId;
+
+        const foundRecipes = await Recipe.find({
+            owner: userId
+        });
+        console.log(foundRecipes);
+
+        res.render("recipes/show_my_all", {
+            recipes: foundRecipes
+        });
+    } catch (errDb) {
+        console.log(errDb);
+    }
+
+});
+
 router.get('/:id/my/show', protectedUserRoute, async (req, res, next) => {
     console.log('GET my recipes And show one');
     try {
@@ -183,41 +202,6 @@ router.get('/:id/my/show', protectedUserRoute, async (req, res, next) => {
 
         const foundRecipe = await Recipe.findById(recipeId);
         console.log(foundRecipe);
-        console.log(foundRecipe.tags);
-        /*
-        const mapUsers = users.map((user) => {
-            console.log(user);
-            return user.toObject();
-          });
-      
-      
-        const promises = mapUsers.map(u => Recipe.find({
-        owner: `${u._id}`
-        }));
-    
-        Promise.all(promises).then(recipes => {
-    
-        mapUsers.forEach(user => {
-            const foundRecipe = recipes.find(recipe => recipe[0] && recipe[0].owner.toString() === user._id.toString())
-            user.nbRecipes = foundRecipe ? foundRecipe.length : 0
-        });
-        console.log(mapUsers);
-        */
-        const allTags = await Tag.find({});
-        let mapTags = foundRecipe.tags.map((tag) => {
-            return {
-                id: tag
-            }
-        });
-
-        console.log(mapTags);
-
-        console.log('-----', mapTags);
-        // const promisesTags = mapTags.map(tag => Tag.findById(
-        //     tag
-        // ));
-
-        //console.log(promisesTags);
 
         res.render("recipes/show_my_one", {
             recipe: foundRecipe

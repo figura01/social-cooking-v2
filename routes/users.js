@@ -252,9 +252,12 @@ router.post('/:id/profile/edit', protectedUserRoute, uploader.single("newAvatar"
       console.log('keep old password');
     }
     user.username = user.firstname + ' ' + user.lastname;
-    const updatedUser = await User.findByIdAndUpdate(userId, user, {new: true});
+    const updatedUser = await User.findByIdAndUpdate(userId, user, {
+      new: true
+    });
     console.log(updatedUser);
 
+    res.locals.avatar = updatedUser.avatar;
     res.redirect(`/users/${userId}/profile`);
 
   } catch (errDb) {
