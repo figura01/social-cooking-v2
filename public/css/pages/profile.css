@@ -13,7 +13,8 @@
 
 .user-profile .visu img {
     object-fit: cover;
-
+    width: 100%;
+    height: auto;
 }
 
 .user-profile .content-info {
