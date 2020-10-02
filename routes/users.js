@@ -22,7 +22,7 @@ router.get('/create', protectedAdminRoute, function (req, res, next) {
   res.render('users/create_form');
 });
 
-router.post('/create', protectedAdminRoute,  uploader.single("avatar"), async (req, res, next) => {
+router.post('/create', protectedAdminRoute, uploader.single("avatar"), async (req, res, next) => {
   console.log('POST Create user');
   console.log('req.body: ', req.body);
   console.log('req.file: ', req.file);
@@ -58,7 +58,7 @@ router.post('/create', protectedAdminRoute,  uploader.single("avatar"), async (r
   }
 });
 
-router.get('/:id/edit', protectedAdminRoute,  async (req, res, next) => {
+router.get('/:id/edit', protectedAdminRoute, async (req, res, next) => {
   try {
     const userId = req.params.id;
 
@@ -118,7 +118,7 @@ router.post('/:id/edit', protectedAdminRoute, uploader.single("newAvatar"), asyn
 
 });
 
-router.get('/:id/delete', protectedAdminRoute,  async (req, res, next) => {
+router.get('/:id/delete', protectedAdminRoute, async (req, res, next) => {
   const userId = req.params.id;
   await User.findByIdAndRemove(userId);
   res.redirect('/users');
@@ -126,13 +126,15 @@ router.get('/:id/delete', protectedAdminRoute,  async (req, res, next) => {
 
 router.get("/all", async (req, res, next) => {
   try {
-     const userConnected = res.locals.userId;
+    const userConnected = res.locals.userId;
     const users = await User.find({
       role: "user",
-      _id: {$ne: userConnected}
+      _id: {
+        $ne: userConnected
+      }
     });
 
-   
+
 
 
     const mapUsers = users.map((user) => {
@@ -150,7 +152,7 @@ router.get("/all", async (req, res, next) => {
       mapUsers.forEach(user => {
         const foundRecipe = recipes.find(recipe => recipe[0] && recipe[0].owner.toString() === user._id.toString())
         user.nbRecipes = foundRecipe ? foundRecipe.length : 0
-      })
+      });
       console.log(mapUsers);
 
       console.log('-------res.locals-------', res.locals);
@@ -178,7 +180,27 @@ router.get("/all", async (req, res, next) => {
 });
 
 router.get('/:id/profile', async (req, res, next) => {
-  console.log('GET profile for user logged only')
+  console.log('GET profile for user logged only');
+  try {
+    const userId = req.params.id;
+
+    const user = await User.findById(userId);
+    const recipes = await Recipe.find({
+      owner: userId
+    });
+    console.log(user);
+    console.log(recipes);
+
+    if (user) {
+      res.render("users/profile", {
+        user,
+        recipes,
+      });
+    }
+  } catch (errDb) {
+    console.log(errDb);
+  }
+
 });
 
 module.exports = router;

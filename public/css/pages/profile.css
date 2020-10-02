@@ -1,0 +1,76 @@
+.header-card {
+    display: flex;
+    background-color: whitesmoke;
+    padding: 1rem;
+    margin: 1rem 0;
+}
+
+.user-profile .visu {
+    margin-right: 1rem;
+    width: 100%;
+    overflow: hidden;
+}
+
+.user-profile .visu img {
+    object-fit: cover;
+
+}
+
+.user-profile .content-info {
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    width: 100%;
+}
+
+.content-info .username {
+    margin-bottom: .5rem;
+    font-size: 1.2rem;
+}
+
+.content-info .username::first-letter {
+    text-transform: uppercase;
+}
+
+.content-info p {
+    font-size: 1rem;
+}
+
+.content-info .actions-btn {
+    justify-content: flex-end;
+}
+
+.user-profile section {
+    margin: 1rem 0;
+}
+
+.user-profile .title-section {
+    font-size: 1.2rem;
+    margin-bottom: .5rem;
+}
+
+.user-profile .content-card {
+    padding: 0rem 1rem .5rem;
+}
+
+.user-profile .content-card h5 {
+    font-size: 1rem;
+}
+
+.user-profile .content-card h5::first-letter {
+    text-transform: uppercase;
+}
+
+.user-profile .recipe .actions-btns {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+.user-profile .recipe .actions-btns .btn {
+    display: flex;
+    padding: .1rem 1.2rem;
+    border-radius: 0;
+    color: white;
+}

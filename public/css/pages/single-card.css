@@ -1,0 +1,9 @@
+.page-single-card .recipe .content-header,
+.page-single-card .recipe section,
+.page-single-card .recipe .action-btn {
+    padding: .5rem 1rem;
+}
+
+.page-single-card .section-steps li {
+    list-style: disc;
+}

@@ -29,6 +29,10 @@ a:hover {
     color: rgba(0, 0, 0, 8);
 }
 
+button {
+    border: 0;
+}
+
 button:hover,
 a:hover {
     outline: none;
@@ -62,6 +66,7 @@ p {
 .container {
     width: 100%;
     margin: 0 auto;
+    padding: 0 10px;
 }
 
 .table thead th {
@@ -117,14 +122,36 @@ p {
 }
 
 /********* BTNS ***********/
+.btn {
+    padding: .2rem 1.2rem;
+    border-radius: 4px;
+    color: whitesmoke;
+    font-size: 1rem;
+    ;
+}
+
 .btn.btn-more {
-    padding: 4px 10px;
+
     background-color: rgb(186 33 38);
     color: white;
-    border-radius: 4px;
+
     transition: all .3s ease-out;
+}
+
+.btn.btn-show,
+.btn-add-favorite,
+.btn-create {
+    background-color: rgba(93, 197, 93, 1);
+}
+
+.btn.btn-delete {
+    background-color: rgba(169, 24, 29, 1);
 }
 
 .btn.btn-more:hover {
     background-color: rgb(206 47 52);
+}
+
+.btn.btn-edit {
+    background-color: orange;
 }

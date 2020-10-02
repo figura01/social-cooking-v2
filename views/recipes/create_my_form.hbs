@@ -1,0 +1,142 @@
+<div class="container">
+    <h1>Recipes Create</h1>
+    <form class="form form-create my-recipe" action="/recipes/my/create" method="POST" enctype="multipart/form-data">
+        <div class="content-parts">
+            <div class="part">
+                <div class="form-group">
+                    <label for="recipe-title">Title</label>
+                    <input type="text" name="title" id="recipe-title" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="recipe-description">Description</label>
+                    <textarea name="description" id="recipe-description" rows="5" required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="recipe-category">Category</label>
+                    <select name="category" id="recipe-categoty" required>
+                        <option value="">--Please choose a category--</option>
+                        {{#each categories}}
+                        <option value="{{this._id}}">{{this.label}}</option>
+                        {{/each}}
+                    </select>
+                </div>
+            </div>
+
+
+            <div class="part ingredients">
+                <strong>Ingredients</strong>
+                <div class="form-group">
+                    <label for="recipe-ingredient-1">1</label>
+                    <input type="text" class="input input-ingredient" name="ingredients" id="recipe-ingredient-1"
+                        required>
+                </div>
+
+                <div class="form-group">
+                    <label for="recipe-ingredient-1">2</label>
+                    <input type="text" class="input input-ingredient" name="ingredients" id="recipe-ingredient-2">
+                </div>
+
+                <div class="form-group">
+                    <label for="recipe-ingredient-1">3</label>
+                    <input type="text" class="input input-ingredient" name="ingredients" id="recipe-ingredient-3">
+                </div>
+
+                <div class="form-group">
+                    <label for="recipe-ingredient-1">4</label>
+                    <input type="text" class="input input-ingredient" name="ingredients" id="recipe-ingredient-4">
+                </div>
+
+                <div class="form-group">
+                    <label for="recipe-ingredient-1">5</label>
+                    <input type="text" class="input input-ingredient" name="ingredients" id="recipe-ingredient-5">
+                </div>
+
+                <div class="form-group">
+                    <label for="recipe-ingredient-1">6</label>
+                    <input type="text" class="input input-ingredient" name="ingredients" id="recipe-ingredient-6">
+                </div>
+            </div>
+
+            <div class="part steps">
+                <div class="form-group">
+                    <strong>Steps</strong>
+                    <div class="step">
+                        <label for="recipe-step-1">1
+                            <input type="text" name="steps" id="recipe-step-1">
+                        </label>
+                    </div>
+
+                    <div class="step">
+                        <label for="recipe-step-2">2
+                            <input type="text" name="steps" id="recipe-step-2">
+                        </label>
+                    </div>
+                    <div class="step">
+                        <label for="recipe-step-3">3
+                            <input type="text" name="steps" id="recipe-step-3">
+                        </label>
+                    </div>
+                    <div class="step">
+                        <label for="recipe-step-2">4
+                            <input type="text" name="steps" id="recipe-step-4">
+                        </label>
+                    </div>
+                    <div class="step">
+                        <label for="recipe-step-2">5
+                            <input type="text" name="steps" id="recipe-step-5">
+                        </label>
+                    </div>
+                    <div class="step">
+                        <label for="recipe-step-2">6
+                            <input type="text" name="steps" id="recipe-step-6">
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <section class="section section-recipes-tags" <div class="form-group">
+            <strong for="recipe-tags">Tags</strong>
+            <div class="recipes-tags">
+                {{#each tags}}
+                <div class="tag">
+                    <label for="tag-{{this.label}}" class="label-tag">
+                        <input class="input-tag" type="checkbox" id="tag-{{this.label}}" name="tags" value={{this._id}}>
+                        {{this.label}}
+                    </label>
+                </div>
+
+                {{/each}}
+            </div>
+        </section>
+
+        <div class="form-group">
+            <strong>Type of Plat</strong>
+            <div class="type-of-plat">
+                <label for="recipe-entrie">Entrie
+                    <input type="radio" id="recipe-entrie" name="typePlate" value="Entrie" checked />
+                </label>
+                <label for="recipe-plat">Plat
+                    <input type="radio" id="recipe-plat" name="typePlate" value="Plat" />
+                </label>
+                <label for="recipe-dessert">Dessert
+                    <input type="radio" id="recipe-dessert" name="typePlate" value="Dessert" />
+                </label>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="recipe-image">Image</label>
+            <input type="file" name="image" id="recipe-image" required>
+        </div>
+
+
+        <div class="form-footer">
+            <button class="btn btn-create">Create</button>
+        </div>
+
+    </form>
+
+</div>

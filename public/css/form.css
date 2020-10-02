@@ -2,3 +2,75 @@
     width: 50px;
     height: auto;
 }
+
+.form {
+    background-color: white;
+    padding: 1rem;
+}
+
+.form label {
+    display: block;
+    font-weight: 700;
+    font-size: .8rem;
+    display: flex;
+}
+
+.form .content-parts {
+    display: flex;
+    flex-wrap: wrap;
+
+}
+
+.form .part {
+    width: 100%;
+
+}
+
+.form .form-group {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin: .4rem 0;
+}
+
+.form-create input[type="text"] {
+    width: 100%;
+}
+
+.form-create.my-recipe .recipes-tags,
+.form-create.my-recipe .type-of-plat {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.form-create.my-recipe .recipes-tags .tag {
+    display: flex;
+    width: auto;
+}
+
+.form-create.my-recipe .input-tag {
+    margin-right: .2rem;
+}
+
+.form-create.my-recipe .label-tag {
+    margin-right: .4rem;
+}
+
+.part.ingredients .form-group {
+    display: flex;
+    flex-direction: row;
+
+}
+
+.part.ingredients strong,
+.part.steps strong {
+    font-size: .8rem;
+}
+
+.part.ingredients label {
+    padding-right: .5rem;
+}
+
+.part.steps input {
+    margin-left: .5rem;
+}

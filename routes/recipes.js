@@ -7,7 +7,7 @@ const User = require("../models/Users");
 const upoloader = require("../config/cloudinary");
 const protectedAdminRoute = require("../middlewares/protectedAdminRoute");
 const protectedUserRoute = require("../middlewares/protectedUserRoute");
-router.get('/', protectedAdminRoute,  async (req, res, next) => {
+router.get('/', protectedAdminRoute, async (req, res, next) => {
     try {
         const recipes = await Recipe.find({});
         res.render("recipes/recipes", {
@@ -19,7 +19,7 @@ router.get('/', protectedAdminRoute,  async (req, res, next) => {
 
 });
 
-router.get('/create', protectedAdminRoute,  async (req, res, next) => {
+router.get('/create', protectedAdminRoute, async (req, res, next) => {
     try {
         const tags = await Tag.find({});
         const categories = await Category.find({});
@@ -37,7 +37,7 @@ router.get('/create', protectedAdminRoute,  async (req, res, next) => {
 
 });
 
-router.post('/create', protectedAdminRoute,  upoloader.single("image"), async (req, res, next) => {
+router.post('/create', protectedAdminRoute, upoloader.single("image"), async (req, res, next) => {
     try {
         console.log('POST create Recipe');
         console.log(req.body);
@@ -176,28 +176,155 @@ router.get("/:id/user", async (req, res, next) => {
     }
 });
 
-router.get('/:id/my', protectedUserRoute, (req, res, next) => {
-    console.log('GET my recipes from this user');
+router.get('/:id/my/show', protectedUserRoute, async (req, res, next) => {
+    console.log('GET my recipes And show one');
+    try {
+        const recipeId = req.params.id;
+
+        const foundRecipe = await Recipe.findById(recipeId);
+        console.log(foundRecipe);
+        console.log(foundRecipe.tags);
+        /*
+        const mapUsers = users.map((user) => {
+            console.log(user);
+            return user.toObject();
+          });
+      
+      
+        const promises = mapUsers.map(u => Recipe.find({
+        owner: `${u._id}`
+        }));
+    
+        Promise.all(promises).then(recipes => {
+    
+        mapUsers.forEach(user => {
+            const foundRecipe = recipes.find(recipe => recipe[0] && recipe[0].owner.toString() === user._id.toString())
+            user.nbRecipes = foundRecipe ? foundRecipe.length : 0
+        });
+        console.log(mapUsers);
+        */
+        const allTags = await Tag.find({});
+        let mapTags = foundRecipe.tags.map((tag) => {
+            return {
+                id: tag
+            }
+        });
+
+        console.log(mapTags);
+
+        console.log('-----', mapTags);
+        // const promisesTags = mapTags.map(tag => Tag.findById(
+        //     tag
+        // ));
+
+        //console.log(promisesTags);
+
+        res.render("recipes/show_my_one", {
+            recipe: foundRecipe
+        });
+    } catch (errDb) {
+        console.log(errDb);
+    }
+
 });
 
-router.get('/:id/my/create', protectedUserRoute, (req, res, next) => {
+router.get('/my/create', protectedUserRoute, async (req, res, next) => {
     console.log('GET Create personnal recipe');
+    console.log(res.locals.userId);
+
+    const categories = await Category.find({});
+    const tags = await Tag.find({});
+
+    res.render("recipes/create_my_form", {
+        tags,
+        categories
+    });
 });
 
-router.post('/:id/my/create', protectedUserRoute, (req, res, next) => {
-    console.log('POST Create personnal recipe');
+router.post('/my/create', protectedUserRoute, upoloader.single("image"), async (req, res, next) => {
+    try {
+        console.log('POST Create personnal recipe');
+        const recipe = req.body;
+        recipe.owner = res.locals.userId;
+
+        if (req.file) {
+            recipe.image = req.file.path;
+        }
+
+        console.log(recipe);
+        const newRecipe = await Recipe.create(recipe);
+        console.log(newRecipe);
+
+        res.redirect(`/users/${res.locals.userId}/profile`);
+    } catch (errDb) {
+        console.log(errDb);
+
+    }
 });
 
-router.get('/:id/my/:recipeId/edit', protectedUserRoute, (req, res, next) => {
-    console.log('GET EDIT personnal recipe');
+router.get('/:id/my/edit', protectedUserRoute, async (req, res, next) => {
+    try {
+        console.log('GET EDIT personnal recipe');
+        const recipeId = req.params.id;
+
+        const recipe = await Recipe.findById(recipeId);
+        const tags = await Tag.find({});
+        const categories = await Category.find({});
+
+        res.render("recipes/edit_my_form", {
+            recipe,
+            tags,
+            categories,
+        });
+    } catch (errDb) {
+        console.log(errDb);
+    }
+
 });
 
-router.post('/:id/my/:recipeId/edit', protectedUserRoute, (req, res, next) => {
-    console.log('POST EDIT personnal recipe');
+router.post('/:id/my/edit', protectedUserRoute, upoloader.single("image"), async (req, res, next) => {
+    try {
+        console.log('POST EDIT personnal recipe');
+        const recipeId = req.params.id;
+        const recipe = req.body;
+
+        console.log(recipe);
+
+        if (req.file) {
+            console.log('have a file');
+            recipe.image = req.file.path;
+        } else {
+            console.log('haven t  a file');
+            recipe.image = recipe.oldImage;
+            delete recipe.oldImage;
+        }
+        recipe.owner = res.locals.userId;
+        console.log(recipe);
+
+        const updatedRecipe = await Recipe.findByIdAndUpdate(recipeId, recipe, {
+            new: true
+        });
+
+        res.redirect(`/users/${res.locals.userId}/profile`);
+    } catch (errDb) {
+        console.log(errDb);
+    }
+
+
 });
 
-router.get('/:id/my/:recipeId/delete', protectedUserRoute, (req, res, next) => {
-    console.log('GET DELETE personnal recipe');
+router.get('/:id/my/delete', protectedUserRoute, async (req, res, next) => {
+    try {
+        console.log('GET DELETE personnal recipe');
+        const recipeId = req.params.id;
+
+        const recipeDel = await Recipe.findByIdAndRemove(recipeId);
+
+        res.redirect(`/users/${res.locals.userId}/profile`);
+
+    } catch (errDb) {
+        console.log(errDb);
+    }
 });
 
 

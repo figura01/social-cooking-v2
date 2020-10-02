@@ -1,6 +1,16 @@
+#nav-admin,
 #nav {
     background-color: black;
-    height: 4em;
+    height: 4.9rem;
+
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+    z-index: 100;
+
 }
 
 .nav-spacer {
@@ -26,11 +36,13 @@
     color: var(--color-red);
 }
 
+#nav-admin .nav-links,
 #nav .nav-links {
     display: flex;
     height: 4em;
 }
 
+#nav-admin .nav-item,
 #nav .nav-item {
     display: flex;
     flex-direction: column;
@@ -38,10 +50,26 @@
 
 }
 
+#nav-admin .nav-link,
 #nav .nav-link {
     display: flex;
     padding: 0.5em .8em;
     color: whitesmoke;
     font-size: 1.3em;
     font-weight: 700;
+}
+
+#nav-admin .nav-link img,
+#nav .nav-link img {
+    width: 25px;
+    height: 25px;
+    border-radius: 20px;
+    object-fit: cover;
+    margin-right: 5px;
+}
+
+#nav-admin .nav-link.profile,
+#nav .nav-link.profile {
+    display: flex;
+    align-items: center;
 }

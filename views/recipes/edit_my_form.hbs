@@ -1,0 +1,107 @@
+<div class="container">
+    <h1>Recipes Edit</h1>
+    <form class="form form-create my-recipe" action="/recipes/{{recipe._id}}/my/edit" method="POST"
+        enctype="multipart/form-data">
+        <div class="content-parts">
+            <div class="part">
+                <div class="form-group">
+                    <label for="recipe-title">Title</label>
+                    <input type="text" name="title" id="recipe-title" required value="{{recipe.title}}">
+                </div>
+
+                <div class="form-group">
+                    <label for="recipe-description">Description</label>
+                    <textarea name="description" id="recipe-description" rows="5"
+                        required>{{recipe.description}}</textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="recipe-category">Category</label>
+                    <select name="category" id="recipe-categoty" required>
+                        {{#each categories}}
+                        {{#includesIdInAOO this._id ../recipe.category}}
+                        <option selected value="{{this._id}}">{{this.label}}</option>
+                        {{else}}
+                        <option value="{{this._id}}">{{this.label}}</option>
+
+                        {{/includesIdInAOO}}
+                        {{/each}}
+                    </select>
+                </div>
+            </div>
+
+
+            <div class="part ingredients">
+                <strong>Ingredients</strong>
+                {{#each recipe.ingredients}}
+                <div class="form-group">
+                    <label for="recipe-ingredient-1"></label>
+                    <input type="text" class="input input-ingredient" name="ingredients" id="recipe-ingredient-1"
+                        value="{{this}}">
+                </div>
+                {{/each}}
+
+            </div>
+
+            <div class="part steps">
+                <div class="form-group">
+                    <strong>Steps</strong>
+                    {{#each recipe.steps}}
+                    <div class="step">
+                        <label for="recipe-step-1">
+                            <input type="text" name="steps" id="recipe-step-1" value="{{this}}">
+                        </label>
+                    </div>
+                    {{/each}}
+                </div>
+            </div>
+        </div>
+
+        <section class="section section-recipes-tags" <div class="form-group">
+            <strong for="recipe-tags">Tags</strong>
+            <div class="recipes-tags">
+                {{#each tags}}
+                <div class="tag">
+                    <label for="tag-{{this.label}}">
+                        {{#includesId ../recipe.tags this._id}}
+                        <input checked type="checkbox" id="tag-{{this.label}}" name="tags" value="{{this._id}}" />
+                        {{this.label}}
+                        {{else}}
+                        <input type="checkbox" id="tag-{{this.label}}" name="tags" value="{{this._id}}"> {{this.label}}
+                        {{/includesId}}
+                    </label>
+                </div>
+                {{/each}}
+            </div>
+        </section>
+
+        <div class="form-group">
+            <strong>Type of Plat</strong>
+            <div class="type-of-plat">
+                <label for="recipe-entrie">Entrie
+                    <input type="radio" id="recipe-entrie" name="typePlate" value="Entrie" checked />
+                </label>
+                <label for="recipe-plat">Plat
+                    <input type="radio" id="recipe-plat" name="typePlate" value="Plat" />
+                </label>
+                <label for="recipe-dessert">Dessert
+                    <input type="radio" id="recipe-dessert" name="typePlate" value="Dessert" />
+                </label>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="recipe-image">Image</label>
+            <img src="{{recipe.image}}" />
+            <input type="file" name="newImage" id="recipe-image" />
+            <input type="text" name="oldImage" value="{{recipe.image}}" hidden="true" />
+        </div>
+
+
+        <div class="form-footer">
+            <button class="btn btn-create">Update</button>
+        </div>
+
+    </form>
+
+</div>

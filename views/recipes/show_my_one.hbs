@@ -36,12 +36,12 @@
                     {{/each}}
                 </ul>
             </section>
-            {{#if isLoggedIn}}
+
             <div class="action-btn">
-                <button class="btn btn-add-favorite">Add to favorite</button>
-                <button class="btn btn-add-favorite">Follow this author</button>
+                <a href="/recipes/{{recipe._id}}/my/edit" class="btn btn-edit">Edit</a>
+                <a href="/recipes/{{recipe._id}}/my/delete" class="btn btn-delete">Delete</a>
             </div>
-            {{/if}}
+
         </div>
     </div>
 </div>
