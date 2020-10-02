@@ -166,11 +166,11 @@ p {
 .btn-btn-signin,
 .btn.btn-signup {
     background-color: rgb(186, 33, 38);
-    color: white;
     transition: all 0.2s ease-out;
+    color: white;
 }
 
-.btn-btn-signin:hover,
+.btn.btn-signin:hover,
 .btn.btn-signup:hover {
     background-color: rgb(202, 55, 60);
     background-color: rgb(202, 55, 60);
