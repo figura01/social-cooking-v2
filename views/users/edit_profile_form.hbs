@@ -1,0 +1,45 @@
+<div class="page page-user edit-profile">
+    <div class="container">
+
+        <h2 class="title-page">Edit your profile</h2>
+
+        <form class="form profile-user" action="/users/{{user._id}}/profile/edit" method="POST"
+            enctype="multipart/form-data">
+            <div class="content-form">
+                <div class="form-group">
+                    <label for="input-avatar">Avatar</label>
+                    <img src="{{user.avatar}}" />
+                    <input type="file" name="newAvatar" id="input-avatar" class="input" />
+                    <input type="text" name="oldAvatar" value="{{user.avatar}}" hidden="true" />
+                </div>
+
+                <div class="form-group">
+                    <label for="input-firstname">First name</label>
+                    <input type="text" name="firstname" id="input-firstname" class="input" value="{{user.firstname}}" />
+                </div>
+
+                <div class="form-group">
+                    <label for="input-lastname">Last name</label>
+                    <input type="text" name="lastname" id="input-lastname" class="input" value="{{user.lastname}}" />
+                </div>
+
+                <div class="form-group">
+                    <label for="input-lastname">Email</label>
+                    <input type="email" name="email" id="input-lastname" class="input" value="{{user.email}}" />
+                </div>
+
+                <div class="form-group">
+                    <label for="input-lastname">New Password</label>
+                    <input type="password" name="newPassword" id="input-lastname" class="input" />
+                    <input type="text" name="oldPassword" value="{{user.password}}" hidden>
+                </div>
+            </div>
+
+            <div class="footer-form">
+                <button class="btn btn-update">Update</button>
+            </div>
+
+        </form>
+
+    </div>
+</div>

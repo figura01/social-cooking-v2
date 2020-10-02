@@ -7,6 +7,7 @@ const Recipe = require('../models/Recipes');
 const salt = 10;
 
 const protectedAdminRoute = require("../middlewares/protectedAdminRoute");
+const protectedUserRoute = require("../middlewares/protectedUserRoute");
 
 /* GET users listing. */
 router.get('/', protectedAdminRoute, async (req, res, next) => {
@@ -179,7 +180,7 @@ router.get("/all", async (req, res, next) => {
 
 });
 
-router.get('/:id/profile', async (req, res, next) => {
+router.get('/:id/profile', protectedUserRoute, async (req, res, next) => {
   console.log('GET profile for user logged only');
   try {
     const userId = req.params.id;
@@ -201,6 +202,64 @@ router.get('/:id/profile', async (req, res, next) => {
     console.log(errDb);
   }
 
+});
+
+router.get('/:id/profile/edit', protectedUserRoute, async (req, res, next) => {
+  console.log('GET profile for user logged only');
+  try {
+    const userId = req.params.id;
+
+    const user = await User.findById(userId);
+    res.render("users/edit_profile_form", {
+      user
+    });
+  } catch (errDb) {
+    console.log(errDb);
+  }
+
+});
+
+router.get('/:id/profile/edit', protectedUserRoute, async (req, res, next) => {
+  console.log('GET profile for user logged only');
+  try {
+    const userId = req.params.id;
+
+    const user = await User.findById(userId);
+    res.render("users/edit_profile_form", {
+      user
+    });
+  } catch (errDb) {
+    console.log(errDb);
+  }
+});
+
+router.post('/:id/profile/edit', protectedUserRoute, uploader.single("newAvatar"), async (req, res, next) => {
+  console.log('POST profile for user logged only');
+  try {
+    const userId = req.params.id;
+    const user = req.body;
+
+    console.log(user, userId);
+
+    if (req.file) {
+      user.avatar = req.file.path;
+    }
+
+    if (user.newPassword !== '') {
+      console.log('check for a new password');
+      user.password = bcrypt.hashSync(user.newPassword, salt);
+    } else {
+      console.log('keep old password');
+    }
+    user.username = user.firstname + ' ' + user.lastname;
+    const updatedUser = await User.findByIdAndUpdate(userId, user, {new: true});
+    console.log(updatedUser);
+
+    res.redirect(`/users/${userId}/profile`);
+
+  } catch (errDb) {
+    console.log(errDb);
+  }
 });
 
 module.exports = router;

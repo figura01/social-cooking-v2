@@ -3,9 +3,14 @@
     height: auto;
 }
 
+.form img {
+    object-fit: cover;
+}
+
 .form {
     background-color: white;
     padding: 1rem;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
 }
 
 .form label {
