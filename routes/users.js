@@ -219,19 +219,6 @@ router.get('/:id/profile/edit', protectedUserRoute, async (req, res, next) => {
 
 });
 
-router.get('/:id/profile/edit', protectedUserRoute, async (req, res, next) => {
-  console.log('GET profile for user logged only');
-  try {
-    const userId = req.params.id;
-
-    const user = await User.findById(userId);
-    res.render("users/edit_profile_form", {
-      user
-    });
-  } catch (errDb) {
-    console.log(errDb);
-  }
-});
 
 router.post('/:id/profile/edit', protectedUserRoute, uploader.single("newAvatar"), async (req, res, next) => {
   console.log('POST profile for user logged only');
@@ -256,8 +243,8 @@ router.post('/:id/profile/edit', protectedUserRoute, uploader.single("newAvatar"
       new: true
     });
     console.log(updatedUser);
-
-    res.locals.avatar = updatedUser.avatar;
+    const userObject = updatedUser.toObject();
+    req.session.currentUser.avatar = userObject.avatar;
     res.redirect(`/users/${userId}/profile`);
 
   } catch (errDb) {
