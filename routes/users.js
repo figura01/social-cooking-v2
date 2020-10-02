@@ -245,6 +245,7 @@ router.post('/:id/profile/edit', protectedUserRoute, uploader.single("newAvatar"
     console.log(updatedUser);
     const userObject = updatedUser.toObject();
     req.session.currentUser.avatar = userObject.avatar;
+    req.session.currentUser.username = userObject.username;
     res.redirect(`/users/${userId}/profile`);
 
   } catch (errDb) {
